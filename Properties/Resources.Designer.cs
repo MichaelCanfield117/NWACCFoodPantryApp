@@ -69,5 +69,15 @@ namespace FoodPantryApp.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Secondary_NWACC_Food_Pantry_Black_ {
+            get {
+                object obj = ResourceManager.GetObject("Secondary NWACC Food Pantry Black ", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

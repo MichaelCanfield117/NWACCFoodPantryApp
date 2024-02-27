@@ -121,4 +121,7 @@
   <data name="Primary Food Pantry Color" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Primary Food Pantry Color.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Secondary NWACC Food Pantry Black " type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Secondary NWACC Food Pantry Black .jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
