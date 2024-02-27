@@ -41,6 +41,7 @@
             RemoveInventoryButton = new Button();
             ResetListButton = new Button();
             UpdateListButton = new Button();
+            OpenFileButton = new Button();
             ((System.ComponentModel.ISupportInitialize)TitlePictureBox).BeginInit();
             SuspendLayout();
             // 
@@ -48,9 +49,10 @@
             // 
             StatusLabel.AutoSize = true;
             StatusLabel.Font = new Font("Segoe UI", 14F);
-            StatusLabel.Location = new Point(190, 794);
+            StatusLabel.Location = new Point(238, 992);
+            StatusLabel.Margin = new Padding(4, 0, 4, 0);
             StatusLabel.Name = "StatusLabel";
-            StatusLabel.Size = new Size(83, 32);
+            StatusLabel.Size = new Size(97, 38);
             StatusLabel.TabIndex = 0;
             StatusLabel.Text = "Status:";
             // 
@@ -58,9 +60,10 @@
             // 
             StatusDisplay.AutoSize = true;
             StatusDisplay.Font = new Font("Segoe UI", 14F);
-            StatusDisplay.Location = new Point(279, 794);
+            StatusDisplay.Location = new Point(349, 992);
+            StatusDisplay.Margin = new Padding(4, 0, 4, 0);
             StatusDisplay.Name = "StatusDisplay";
-            StatusDisplay.Size = new Size(114, 32);
+            StatusDisplay.Size = new Size(133, 38);
             StatusDisplay.TabIndex = 1;
             StatusDisplay.Text = "Loading...";
             // 
@@ -68,26 +71,29 @@
             // 
             InventoryDisplayList.Font = new Font("Segoe UI", 12F);
             InventoryDisplayList.FormattingEnabled = true;
-            InventoryDisplayList.ItemHeight = 28;
-            InventoryDisplayList.Location = new Point(12, 199);
+            InventoryDisplayList.ItemHeight = 32;
+            InventoryDisplayList.Location = new Point(15, 249);
+            InventoryDisplayList.Margin = new Padding(4);
             InventoryDisplayList.Name = "InventoryDisplayList";
-            InventoryDisplayList.Size = new Size(499, 592);
+            InventoryDisplayList.Size = new Size(623, 708);
             InventoryDisplayList.TabIndex = 2;
             // 
             // FilterTextBox
             // 
             FilterTextBox.Font = new Font("Segoe UI", 12F);
-            FilterTextBox.Location = new Point(128, 156);
+            FilterTextBox.Location = new Point(160, 195);
+            FilterTextBox.Margin = new Padding(4);
             FilterTextBox.Name = "FilterTextBox";
-            FilterTextBox.Size = new Size(365, 34);
+            FilterTextBox.Size = new Size(455, 39);
             FilterTextBox.TabIndex = 3;
             // 
             // FilterButton
             // 
             FilterButton.Font = new Font("Segoe UI", 12F);
-            FilterButton.Location = new Point(12, 152);
+            FilterButton.Location = new Point(15, 190);
+            FilterButton.Margin = new Padding(4);
             FilterButton.Name = "FilterButton";
-            FilterButton.Size = new Size(110, 42);
+            FilterButton.Size = new Size(138, 52);
             FilterButton.TabIndex = 6;
             FilterButton.Text = "Filter List";
             FilterButton.UseVisualStyleBackColor = true;
@@ -96,9 +102,10 @@
             // TitlePictureBox
             // 
             TitlePictureBox.Image = Properties.Resources.Primary_Food_Pantry_Color;
-            TitlePictureBox.Location = new Point(-3, 0);
+            TitlePictureBox.Location = new Point(-4, 0);
+            TitlePictureBox.Margin = new Padding(4);
             TitlePictureBox.Name = "TitlePictureBox";
-            TitlePictureBox.Size = new Size(874, 146);
+            TitlePictureBox.Size = new Size(1092, 182);
             TitlePictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
             TitlePictureBox.TabIndex = 7;
             TitlePictureBox.TabStop = false;
@@ -106,9 +113,10 @@
             // FoodTypeCheckBox
             // 
             FoodTypeCheckBox.AutoSize = true;
-            FoodTypeCheckBox.Location = new Point(499, 162);
+            FoodTypeCheckBox.Location = new Point(624, 202);
+            FoodTypeCheckBox.Margin = new Padding(4);
             FoodTypeCheckBox.Name = "FoodTypeCheckBox";
-            FoodTypeCheckBox.Size = new Size(100, 24);
+            FoodTypeCheckBox.Size = new Size(122, 29);
             FoodTypeCheckBox.TabIndex = 8;
             FoodTypeCheckBox.Text = "Food Type";
             FoodTypeCheckBox.UseVisualStyleBackColor = true;
@@ -116,9 +124,10 @@
             // FoodCategoryCheckBox
             // 
             FoodCategoryCheckBox.AutoSize = true;
-            FoodCategoryCheckBox.Location = new Point(606, 162);
+            FoodCategoryCheckBox.Location = new Point(758, 202);
+            FoodCategoryCheckBox.Margin = new Padding(4);
             FoodCategoryCheckBox.Name = "FoodCategoryCheckBox";
-            FoodCategoryCheckBox.Size = new Size(129, 24);
+            FoodCategoryCheckBox.Size = new Size(157, 29);
             FoodCategoryCheckBox.TabIndex = 9;
             FoodCategoryCheckBox.Text = "Food Category";
             FoodCategoryCheckBox.UseVisualStyleBackColor = true;
@@ -126,20 +135,22 @@
             // AddInventoryItem
             // 
             AddInventoryItem.Font = new Font("Segoe UI", 16F);
-            AddInventoryItem.Location = new Point(517, 401);
+            AddInventoryItem.Location = new Point(646, 501);
+            AddInventoryItem.Margin = new Padding(4);
             AddInventoryItem.Name = "AddInventoryItem";
-            AddInventoryItem.Size = new Size(324, 125);
+            AddInventoryItem.Size = new Size(405, 156);
             AddInventoryItem.TabIndex = 10;
             AddInventoryItem.Text = "Add Inventory Item";
             AddInventoryItem.UseVisualStyleBackColor = true;
-            AddInventoryItem.Click += AddInventoryItem_Click;
+            AddInventoryItem.Click += AddInventoryButton_Click;
             // 
             // UpdateInventoryButton
             // 
             UpdateInventoryButton.Font = new Font("Segoe UI", 16F);
-            UpdateInventoryButton.Location = new Point(517, 270);
+            UpdateInventoryButton.Location = new Point(646, 338);
+            UpdateInventoryButton.Margin = new Padding(4);
             UpdateInventoryButton.Name = "UpdateInventoryButton";
-            UpdateInventoryButton.Size = new Size(324, 125);
+            UpdateInventoryButton.Size = new Size(405, 156);
             UpdateInventoryButton.TabIndex = 11;
             UpdateInventoryButton.Text = "Update Inventory Item";
             UpdateInventoryButton.UseVisualStyleBackColor = true;
@@ -148,9 +159,10 @@
             // RemoveInventoryButton
             // 
             RemoveInventoryButton.Font = new Font("Segoe UI", 16F);
-            RemoveInventoryButton.Location = new Point(517, 532);
+            RemoveInventoryButton.Location = new Point(646, 665);
+            RemoveInventoryButton.Margin = new Padding(4);
             RemoveInventoryButton.Name = "RemoveInventoryButton";
-            RemoveInventoryButton.Size = new Size(324, 125);
+            RemoveInventoryButton.Size = new Size(405, 156);
             RemoveInventoryButton.TabIndex = 12;
             RemoveInventoryButton.Text = "Remove Inventory Item";
             RemoveInventoryButton.UseVisualStyleBackColor = true;
@@ -158,9 +170,10 @@
             // 
             // ResetListButton
             // 
-            ResetListButton.Location = new Point(517, 196);
+            ResetListButton.Location = new Point(646, 245);
+            ResetListButton.Margin = new Padding(4);
             ResetListButton.Name = "ResetListButton";
-            ResetListButton.Size = new Size(236, 68);
+            ResetListButton.Size = new Size(295, 85);
             ResetListButton.TabIndex = 13;
             ResetListButton.Text = "Reset List";
             ResetListButton.UseVisualStyleBackColor = true;
@@ -169,18 +182,30 @@
             // UpdateListButton
             // 
             UpdateListButton.Font = new Font("Segoe UI", 14F);
-            UpdateListButton.Location = new Point(517, 663);
+            UpdateListButton.Location = new Point(646, 829);
+            UpdateListButton.Margin = new Padding(4);
             UpdateListButton.Name = "UpdateListButton";
-            UpdateListButton.Size = new Size(324, 125);
+            UpdateListButton.Size = new Size(405, 156);
             UpdateListButton.TabIndex = 14;
             UpdateListButton.Text = "Update Inventory List";
             UpdateListButton.UseVisualStyleBackColor = true;
             // 
+            // OpenFileButton
+            // 
+            OpenFileButton.Location = new Point(939, 245);
+            OpenFileButton.Name = "OpenFileButton";
+            OpenFileButton.Size = new Size(112, 85);
+            OpenFileButton.TabIndex = 15;
+            OpenFileButton.Text = "Open File";
+            OpenFileButton.UseVisualStyleBackColor = true;
+            OpenFileButton.Click += OpenFileButton_Click;
+            // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(865, 853);
+            ClientSize = new Size(1081, 1050);
+            Controls.Add(OpenFileButton);
             Controls.Add(UpdateListButton);
             Controls.Add(ResetListButton);
             Controls.Add(RemoveInventoryButton);
@@ -194,6 +219,7 @@
             Controls.Add(InventoryDisplayList);
             Controls.Add(StatusDisplay);
             Controls.Add(StatusLabel);
+            Margin = new Padding(4);
             Name = "MainForm";
             Text = "Food Pantry Inventory";
             ((System.ComponentModel.ISupportInitialize)TitlePictureBox).EndInit();
@@ -219,5 +245,6 @@
         private Button RemoveInventoryButton;
         private Button ResetListButton;
         private Button UpdateListButton;
+        private Button OpenFileButton;
     }
 }
