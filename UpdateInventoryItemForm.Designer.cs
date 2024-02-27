@@ -110,7 +110,7 @@
             // 
             AmountLabel.AutoSize = true;
             AmountLabel.Font = new Font("Segoe UI", 13F);
-            AmountLabel.Location = new Point(437, 157);
+            AmountLabel.Location = new Point(451, 157);
             AmountLabel.Name = "AmountLabel";
             AmountLabel.Size = new Size(90, 30);
             AmountLabel.TabIndex = 7;
