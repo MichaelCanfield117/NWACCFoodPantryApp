@@ -42,16 +42,16 @@
             // 
             // ItemNameTextBox2
             // 
-            ItemNameTextBox2.Location = new Point(204, 189);
-            ItemNameTextBox2.Margin = new Padding(2, 2, 2, 2);
+            ItemNameTextBox2.Location = new Point(209, 213);
+            ItemNameTextBox2.Margin = new Padding(2);
             ItemNameTextBox2.Name = "ItemNameTextBox2";
             ItemNameTextBox2.Size = new Size(207, 27);
             ItemNameTextBox2.TabIndex = 1;
             // 
             // SubmitButton2
             // 
-            SubmitButton2.Location = new Point(131, 246);
-            SubmitButton2.Margin = new Padding(2, 2, 2, 2);
+            SubmitButton2.Location = new Point(136, 270);
+            SubmitButton2.Margin = new Padding(2);
             SubmitButton2.Name = "SubmitButton2";
             SubmitButton2.Size = new Size(156, 58);
             SubmitButton2.TabIndex = 3;
@@ -61,8 +61,8 @@
             // 
             // CancelButton2
             // 
-            CancelButton2.Location = new Point(321, 246);
-            CancelButton2.Margin = new Padding(2, 2, 2, 2);
+            CancelButton2.Location = new Point(326, 270);
+            CancelButton2.Margin = new Padding(2);
             CancelButton2.Name = "CancelButton2";
             CancelButton2.Size = new Size(156, 58);
             CancelButton2.TabIndex = 4;
@@ -72,16 +72,16 @@
             // 
             // ItemQuantityTextBox2
             // 
-            ItemQuantityTextBox2.Location = new Point(437, 189);
-            ItemQuantityTextBox2.Margin = new Padding(2, 2, 2, 2);
+            ItemQuantityTextBox2.Location = new Point(442, 213);
+            ItemQuantityTextBox2.Margin = new Padding(2);
             ItemQuantityTextBox2.Name = "ItemQuantityTextBox2";
             ItemQuantityTextBox2.Size = new Size(118, 27);
             ItemQuantityTextBox2.TabIndex = 2;
             // 
             // ItemTypeTextBox2
             // 
-            ItemTypeTextBox2.Location = new Point(45, 189);
-            ItemTypeTextBox2.Margin = new Padding(2, 2, 2, 2);
+            ItemTypeTextBox2.Location = new Point(50, 213);
+            ItemTypeTextBox2.Margin = new Padding(2);
             ItemTypeTextBox2.Name = "ItemTypeTextBox2";
             ItemTypeTextBox2.Size = new Size(121, 27);
             ItemTypeTextBox2.TabIndex = 0;
@@ -90,27 +90,27 @@
             // 
             FoodLabel.AutoSize = true;
             FoodLabel.Font = new Font("Segoe UI", 13F);
-            FoodLabel.Location = new Point(73, 157);
+            FoodLabel.Location = new Point(59, 181);
             FoodLabel.Name = "FoodLabel";
-            FoodLabel.Size = new Size(63, 30);
+            FoodLabel.Size = new Size(102, 30);
             FoodLabel.TabIndex = 5;
-            FoodLabel.Text = "Food";
+            FoodLabel.Text = "Category";
             // 
             // TypeLabel
             // 
             TypeLabel.AutoSize = true;
             TypeLabel.Font = new Font("Segoe UI", 13F);
-            TypeLabel.Location = new Point(252, 157);
+            TypeLabel.Location = new Point(218, 181);
             TypeLabel.Name = "TypeLabel";
-            TypeLabel.Size = new Size(116, 30);
+            TypeLabel.Size = new Size(189, 30);
             TypeLabel.TabIndex = 6;
-            TypeLabel.Text = "Food Type";
+            TypeLabel.Text = "Name/Description";
             // 
             // AmountLabel
             // 
             AmountLabel.AutoSize = true;
             AmountLabel.Font = new Font("Segoe UI", 13F);
-            AmountLabel.Location = new Point(451, 157);
+            AmountLabel.Location = new Point(456, 181);
             AmountLabel.Name = "AmountLabel";
             AmountLabel.Size = new Size(90, 30);
             AmountLabel.TabIndex = 7;
@@ -121,7 +121,7 @@
             pictureBox1.Image = Properties.Resources.Secondary_NWACC_Food_Pantry_Black_;
             pictureBox1.Location = new Point(-8, -3);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(659, 132);
+            pictureBox1.Size = new Size(659, 157);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 8;
             pictureBox1.TabStop = false;
@@ -140,7 +140,7 @@
             Controls.Add(CancelButton2);
             Controls.Add(SubmitButton2);
             Controls.Add(ItemNameTextBox2);
-            Margin = new Padding(2, 2, 2, 2);
+            Margin = new Padding(2);
             Name = "UpdateInventoryItemForm";
             Text = "UpdateInventoryItemForm";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
