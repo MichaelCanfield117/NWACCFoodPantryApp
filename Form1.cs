@@ -11,6 +11,7 @@ namespace FoodPantryApp
             this.InitializeComponent();
             this.inventoryList = new InventoryList();
             this.RefreshInventoryList();
+            this.UpdateListButton.Enabled = false;
         }
 
         private void FilterButton_Click(object sender, EventArgs e)
@@ -79,6 +80,7 @@ namespace FoodPantryApp
             {
                 openFileDialog.Filter = "CSV Files|*.csv|All Files|*.*";
                 openFileDialog.Title = "Select a CSV File";
+                openFileDialog.RestoreDirectory = true;
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
@@ -109,11 +111,36 @@ namespace FoodPantryApp
                         }
 
                         RefreshInventoryList();
+                        this.UpdateListButton.Enabled = true;
                         MessageBox.Show("File loaded successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
                     {
                         MessageBox.Show($"An error occurred while loading the file: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
+        private void SaveFileButton_Click(object sender, EventArgs e)
+        {
+            
+            using (SaveFileDialog saveFileDialog1 = new SaveFileDialog())
+            {
+                saveFileDialog1.InitialDirectory = Environment.CurrentDirectory;
+                saveFileDialog1.Title = "Save Inventory CSV File";
+                saveFileDialog1.DefaultExt = "csv";
+                saveFileDialog1.Filter = "CSV Files|*.csv";
+                saveFileDialog1.RestoreDirectory = true;
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK || saveFileDialog1.FileName != "") ; 
+                {
+                    using (var writer = new StreamWriter(saveFileDialog1.FileName))
+                    {
+                        var allitems = this.inventoryList.GetAllItems();
+                        foreach (var item in allitems)
+                        {
+                            writer.WriteLine($"{item.Type},{item.Name},{item.Quantity}");
+                        }
                     }
                 }
             }

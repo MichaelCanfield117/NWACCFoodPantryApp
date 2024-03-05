@@ -158,6 +158,7 @@
             UpdateListButton.TabIndex = 14;
             UpdateListButton.Text = "Save File";
             UpdateListButton.UseVisualStyleBackColor = true;
+            UpdateListButton.Click += SaveFileButton_Click;
             // 
             // OpenFileButton
             // 
