@@ -39,5 +39,7 @@ namespace FoodPantryApp
         {
             return items.FirstOrDefault(item => item.Name == name);
         }
+
+        public int Count { get { return items.Count; } }
     }
 }

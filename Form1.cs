@@ -8,19 +8,69 @@ namespace FoodPantryApp
 
         public MainForm()
         {
-            InitializeComponent();
-            inventoryList = new InventoryList();
-            RefreshInventoryList();
+            this.InitializeComponent();
+            this.inventoryList = new InventoryList();
+            this.RefreshInventoryList();
         }
 
         private void FilterButton_Click(object sender, EventArgs e)
         {
+            var filterInput = this.FilterTextBox.Text;
+            var filterCheck = this.FilterCheckBoxCheck();
+            if (this.inventoryList.Count > 0)
+            {
+                this.InventoryDisplayList.Items.Clear();
+                var items = this.inventoryList.GetAllItems();
+                foreach (var item in items)
+                {
+                    if (filterCheck == 1)
+                    {
+                        if (item.Type.Contains(filterInput))
+                        {
+                            InventoryDisplayList.Items.Add($"{item.Type} - {item.Name} -- {item.Quantity}");
+                        }
+                    }
+                    else if (filterCheck == 2)
+                    {
+                        if (item.Name.Contains(filterInput))
+                        {
+                            InventoryDisplayList.Items.Add($"{item.Type} - {item.Name} -- {item.Quantity}");
+                        }
+                    }
+                }
+            }
+        }
 
+        private void FoodTypeCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            this.FoodNameCheckBox.Checked = false;
+            this.FoodTypeCheckBox.Checked = true;
+        }
+
+        private void FoodNameCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            this.FoodTypeCheckBox.Checked = false;
+            this.FoodNameCheckBox.Checked = true;
+        }
+
+        private int FilterCheckBoxCheck()
+        {
+            var filterCheck = 0;
+            if (this.FoodTypeCheckBox.Checked)
+            {
+                filterCheck = 1;
+            }
+            else
+            {
+                filterCheck = 2;
+            }
+            return filterCheck;
         }
 
         private void ResetListButton_Click(object sender, EventArgs e)
         {
-
+            this.FilterTextBox.Text = string.Empty;
+            this.RefreshInventoryList();
         }
 
         private void OpenFileButton_Click(object sender, EventArgs e)

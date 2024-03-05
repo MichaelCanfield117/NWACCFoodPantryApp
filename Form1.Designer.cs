@@ -33,7 +33,7 @@
             FilterButton = new Button();
             TitlePictureBox = new PictureBox();
             FoodTypeCheckBox = new CheckBox();
-            FoodCategoryCheckBox = new CheckBox();
+            FoodNameCheckBox = new CheckBox();
             AddInventoryItem = new Button();
             UpdateInventoryButton = new Button();
             RemoveInventoryButton = new Button();
@@ -85,22 +85,26 @@
             // FoodTypeCheckBox
             // 
             FoodTypeCheckBox.AutoSize = true;
+            FoodTypeCheckBox.Checked = true;
+            FoodTypeCheckBox.CheckState = CheckState.Checked;
             FoodTypeCheckBox.Location = new Point(499, 162);
             FoodTypeCheckBox.Name = "FoodTypeCheckBox";
             FoodTypeCheckBox.Size = new Size(100, 24);
             FoodTypeCheckBox.TabIndex = 8;
             FoodTypeCheckBox.Text = "Food Type";
             FoodTypeCheckBox.UseVisualStyleBackColor = true;
+            FoodTypeCheckBox.Click += FoodTypeCheckBox_CheckedChanged;
             // 
-            // FoodCategoryCheckBox
+            // FoodNameCheckBox
             // 
-            FoodCategoryCheckBox.AutoSize = true;
-            FoodCategoryCheckBox.Location = new Point(606, 162);
-            FoodCategoryCheckBox.Name = "FoodCategoryCheckBox";
-            FoodCategoryCheckBox.Size = new Size(129, 24);
-            FoodCategoryCheckBox.TabIndex = 9;
-            FoodCategoryCheckBox.Text = "Food Category";
-            FoodCategoryCheckBox.UseVisualStyleBackColor = true;
+            FoodNameCheckBox.AutoSize = true;
+            FoodNameCheckBox.Location = new Point(606, 162);
+            FoodNameCheckBox.Name = "FoodNameCheckBox";
+            FoodNameCheckBox.Size = new Size(109, 24);
+            FoodNameCheckBox.TabIndex = 9;
+            FoodNameCheckBox.Text = "Food Name";
+            FoodNameCheckBox.UseVisualStyleBackColor = true;
+            FoodNameCheckBox.Click += FoodNameCheckBox_CheckedChanged;
             // 
             // AddInventoryItem
             // 
@@ -159,7 +163,7 @@
             // 
             OpenFileButton.Font = new Font("Segoe UI", 14F);
             OpenFileButton.Location = new Point(517, 199);
-            OpenFileButton.Margin = new Padding(2, 2, 2, 2);
+            OpenFileButton.Margin = new Padding(2);
             OpenFileButton.Name = "OpenFileButton";
             OpenFileButton.Size = new Size(324, 112);
             OpenFileButton.TabIndex = 15;
@@ -178,7 +182,7 @@
             Controls.Add(RemoveInventoryButton);
             Controls.Add(UpdateInventoryButton);
             Controls.Add(AddInventoryItem);
-            Controls.Add(FoodCategoryCheckBox);
+            Controls.Add(FoodNameCheckBox);
             Controls.Add(FoodTypeCheckBox);
             Controls.Add(TitlePictureBox);
             Controls.Add(FilterButton);
@@ -200,7 +204,7 @@
         private Button FilterButton;
         private PictureBox TitlePictureBox;
         private CheckBox FoodTypeCheckBox;
-        private CheckBox FoodCategoryCheckBox;
+        private CheckBox FoodNameCheckBox;
         private Button AddInventoryItem;
         private Button UpdateInventoryButton;
         private Button RemoveInventoryButton;
