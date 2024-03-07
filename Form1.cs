@@ -6,12 +6,27 @@ namespace FoodPantryApp
     {
         private InventoryList inventoryList;
 
+        private List<string> FilterList = new List<string>();
+
         public MainForm()
         {
             this.InitializeComponent();
             this.inventoryList = new InventoryList();
+            this.FillFilterList();
             this.RefreshInventoryList();
             this.UpdateListButton.Enabled = false;
+        }
+
+        private void FillFilterList()
+        {
+            this.FilterList.Add("Type");
+            this.FilterList.Add("Name");
+            this.FilterList.Add("Quantity");
+            foreach (var item in this.FilterList)
+            {
+                this.FilterComboBox.Items.Add(item);
+            }
+            this.FilterComboBox.SelectedIndex = 0;
         }
 
         private void FilterButton_Click(object sender, EventArgs e)
@@ -20,52 +35,43 @@ namespace FoodPantryApp
             var filterCheck = this.FilterCheckBoxCheck();
             if (this.inventoryList.Count > 0)
             {
-                this.InventoryDisplayList.Items.Clear();
                 var items = this.inventoryList.GetAllItems();
+                this.InventoryDisplayList.Items.Clear();
                 foreach (var item in items)
                 {
-                    if (filterCheck == 1)
+                    if (filterCheck == 0)
                     {
                         if (item.Type.Contains(filterInput))
                         {
                             InventoryDisplayList.Items.Add($"{item.Type} - {item.Name} -- {item.Quantity}");
                         }
                     }
-                    else if (filterCheck == 2)
+                    else if (filterCheck == 1)
                     {
                         if (item.Name.Contains(filterInput))
                         {
                             InventoryDisplayList.Items.Add($"{item.Type} - {item.Name} -- {item.Quantity}");
                         }
                     }
+                    else if (filterCheck == 2)
+                    {
+                        var value = int.TryParse(filterInput, out int result);
+                        if (value)
+                        {
+                            if (item.Quantity <= result)
+                            {
+                                InventoryDisplayList.Items.Add($"{item.Type} - {item.Name} -- {item.Quantity}");
+                            }
+                        }
+                    }
                 }
             }
         }
 
-        private void FoodTypeCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            this.FoodNameCheckBox.Checked = false;
-            this.FoodTypeCheckBox.Checked = true;
-        }
-
-        private void FoodNameCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            this.FoodTypeCheckBox.Checked = false;
-            this.FoodNameCheckBox.Checked = true;
-        }
-
         private int FilterCheckBoxCheck()
         {
-            var filterCheck = 0;
-            if (this.FoodTypeCheckBox.Checked)
-            {
-                filterCheck = 1;
-            }
-            else
-            {
-                filterCheck = 2;
-            }
-            return filterCheck;
+            var filterNum = this.FilterComboBox.SelectedIndex;
+            return filterNum;
         }
 
         private void ResetListButton_Click(object sender, EventArgs e)

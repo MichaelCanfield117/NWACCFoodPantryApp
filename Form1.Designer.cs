@@ -32,14 +32,13 @@
             FilterTextBox = new TextBox();
             FilterButton = new Button();
             TitlePictureBox = new PictureBox();
-            FoodTypeCheckBox = new CheckBox();
-            FoodNameCheckBox = new CheckBox();
             AddInventoryItem = new Button();
             UpdateInventoryButton = new Button();
             RemoveInventoryButton = new Button();
             ResetListButton = new Button();
             UpdateListButton = new Button();
             OpenFileButton = new Button();
+            FilterComboBox = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)TitlePictureBox).BeginInit();
             SuspendLayout();
             // 
@@ -82,30 +81,6 @@
             TitlePictureBox.TabIndex = 7;
             TitlePictureBox.TabStop = false;
             // 
-            // FoodTypeCheckBox
-            // 
-            FoodTypeCheckBox.AutoSize = true;
-            FoodTypeCheckBox.Checked = true;
-            FoodTypeCheckBox.CheckState = CheckState.Checked;
-            FoodTypeCheckBox.Location = new Point(499, 162);
-            FoodTypeCheckBox.Name = "FoodTypeCheckBox";
-            FoodTypeCheckBox.Size = new Size(100, 24);
-            FoodTypeCheckBox.TabIndex = 8;
-            FoodTypeCheckBox.Text = "Food Type";
-            FoodTypeCheckBox.UseVisualStyleBackColor = true;
-            FoodTypeCheckBox.Click += FoodTypeCheckBox_CheckedChanged;
-            // 
-            // FoodNameCheckBox
-            // 
-            FoodNameCheckBox.AutoSize = true;
-            FoodNameCheckBox.Location = new Point(606, 162);
-            FoodNameCheckBox.Name = "FoodNameCheckBox";
-            FoodNameCheckBox.Size = new Size(109, 24);
-            FoodNameCheckBox.TabIndex = 9;
-            FoodNameCheckBox.Text = "Food Name";
-            FoodNameCheckBox.UseVisualStyleBackColor = true;
-            FoodNameCheckBox.Click += FoodNameCheckBox_CheckedChanged;
-            // 
             // AddInventoryItem
             // 
             AddInventoryItem.Font = new Font("Segoe UI", 16F);
@@ -141,9 +116,9 @@
             // 
             // ResetListButton
             // 
-            ResetListButton.Location = new Point(741, 152);
+            ResetListButton.Location = new Point(672, 151);
             ResetListButton.Name = "ResetListButton";
-            ResetListButton.Size = new Size(122, 43);
+            ResetListButton.Size = new Size(169, 43);
             ResetListButton.TabIndex = 13;
             ResetListButton.Text = "Reset List";
             ResetListButton.UseVisualStyleBackColor = true;
@@ -172,19 +147,27 @@
             OpenFileButton.UseVisualStyleBackColor = true;
             OpenFileButton.Click += OpenFileButton_Click;
             // 
+            // FilterComboBox
+            // 
+            FilterComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            FilterComboBox.FormattingEnabled = true;
+            FilterComboBox.Location = new Point(499, 160);
+            FilterComboBox.Name = "FilterComboBox";
+            FilterComboBox.Size = new Size(167, 28);
+            FilterComboBox.TabIndex = 16;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(865, 840);
+            Controls.Add(FilterComboBox);
             Controls.Add(OpenFileButton);
             Controls.Add(UpdateListButton);
             Controls.Add(ResetListButton);
             Controls.Add(RemoveInventoryButton);
             Controls.Add(UpdateInventoryButton);
             Controls.Add(AddInventoryItem);
-            Controls.Add(FoodNameCheckBox);
-            Controls.Add(FoodTypeCheckBox);
             Controls.Add(TitlePictureBox);
             Controls.Add(FilterButton);
             Controls.Add(FilterTextBox);
@@ -204,13 +187,12 @@
 
         private Button FilterButton;
         private PictureBox TitlePictureBox;
-        private CheckBox FoodTypeCheckBox;
-        private CheckBox FoodNameCheckBox;
         private Button AddInventoryItem;
         private Button UpdateInventoryButton;
         private Button RemoveInventoryButton;
         private Button ResetListButton;
         private Button UpdateListButton;
         private Button OpenFileButton;
+        private ComboBox FilterComboBox;
     }
 }
