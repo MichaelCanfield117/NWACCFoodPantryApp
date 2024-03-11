@@ -15,6 +15,7 @@ namespace FoodPantryApp
             this.FillFilterList();
             this.RefreshInventoryList();
             this.UpdateListButton.Enabled = false;
+            Logger.WriteLog($"{System.Security.Principal.WindowsIdentity.GetCurrent().Name} started application. ");
         }
 
         private void FillFilterList()
