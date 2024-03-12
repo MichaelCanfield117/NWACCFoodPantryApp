@@ -42,6 +42,7 @@ namespace FoodPantryApp
 
                 // Close the form with DialogResult.OK
                 DialogResult = DialogResult.OK;
+                Logger.WriteLog($"{System.Security.Principal.WindowsIdentity.GetCurrent().Name} added item {newItem.Type}, {newItem.Name}, {newItem.Quantity} to list.");
             }
             catch (Exception ex)
             {

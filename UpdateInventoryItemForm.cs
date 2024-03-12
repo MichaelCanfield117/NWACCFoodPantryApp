@@ -34,9 +34,11 @@ namespace FoodPantryApp
                 }
 
                 // Update the item properties
+                Logger.WriteLog($"{System.Security.Principal.WindowsIdentity.GetCurrent().Name} updated item from {this.selectedItemToUpdate.Type}, {this.selectedItemToUpdate.Name}, {this.selectedItemToUpdate.Quantity}.");
                 selectedItemToUpdate.Type = ItemTypeTextBox2.Text;
                 selectedItemToUpdate.Name = ItemNameTextBox2.Text;
                 selectedItemToUpdate.Quantity = quantity;
+                Logger.WriteLog($"{System.Security.Principal.WindowsIdentity.GetCurrent().Name} updated item to {this.selectedItemToUpdate.Type}, {this.selectedItemToUpdate.Name}, {this.selectedItemToUpdate.Quantity}.");
 
                 // Close the form with DialogResult.OK
                 DialogResult = DialogResult.OK;

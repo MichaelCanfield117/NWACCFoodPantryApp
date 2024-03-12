@@ -1,5 +1,7 @@
 // Form1.cs
 
+using System.Windows.Forms;
+
 namespace FoodPantryApp
 {
     public partial class MainForm : Form
@@ -120,6 +122,7 @@ namespace FoodPantryApp
                         RefreshInventoryList();
                         this.UpdateListButton.Enabled = true;
                         MessageBox.Show("File loaded successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Logger.WriteLog($"{System.Security.Principal.WindowsIdentity.GetCurrent().Name} opened local file {openFileDialog.FileName}.");
                     }
                     catch (Exception ex)
                     {
@@ -131,25 +134,32 @@ namespace FoodPantryApp
 
         private void SaveFileButton_Click(object sender, EventArgs e)
         {
-            
-            using (SaveFileDialog saveFileDialog1 = new SaveFileDialog())
+            try
             {
-                saveFileDialog1.InitialDirectory = Environment.CurrentDirectory;
-                saveFileDialog1.Title = "Save Inventory CSV File";
-                saveFileDialog1.DefaultExt = "csv";
-                saveFileDialog1.Filter = "CSV Files|*.csv";
-                saveFileDialog1.RestoreDirectory = true;
-                if (saveFileDialog1.ShowDialog() == DialogResult.OK || saveFileDialog1.FileName != "") ; 
+                using (SaveFileDialog saveFileDialog1 = new SaveFileDialog())
                 {
-                    using (var writer = new StreamWriter(saveFileDialog1.FileName))
+                    saveFileDialog1.InitialDirectory = Environment.CurrentDirectory;
+                    saveFileDialog1.Title = "Save Inventory CSV File";
+                    saveFileDialog1.DefaultExt = "csv";
+                    saveFileDialog1.Filter = "CSV Files|*.csv";
+                    saveFileDialog1.RestoreDirectory = true;
+                    if (saveFileDialog1.ShowDialog() == DialogResult.OK || saveFileDialog1.FileName != "") ;
                     {
-                        var allitems = this.inventoryList.GetAllItems();
-                        foreach (var item in allitems)
+                        using (var writer = new StreamWriter(saveFileDialog1.FileName))
                         {
-                            writer.WriteLine($"{item.Type},{item.Name},{item.Quantity}");
+                            var allitems = this.inventoryList.GetAllItems();
+                            foreach (var item in allitems)
+                            {
+                                writer.WriteLine($"{item.Type},{item.Name},{item.Quantity}");
+                            }
                         }
                     }
+                    Logger.WriteLog($"{System.Security.Principal.WindowsIdentity.GetCurrent().Name} saved local file {saveFileDialog1.FileName}.");
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while saving the file: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -248,6 +258,7 @@ namespace FoodPantryApp
                         // If the user confirms the removal
                         if (result == DialogResult.Yes)
                         {
+                            Logger.WriteLog($"{System.Security.Principal.WindowsIdentity.GetCurrent().Name} Removed item {itemToRemove.Type}, {itemToRemove.Name}, {itemToRemove.Quantity}");
                             // Remove the item from the inventory list
                             inventoryList.RemoveItem(itemToRemove);
                             RefreshInventoryList();
