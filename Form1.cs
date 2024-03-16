@@ -34,7 +34,7 @@ namespace FoodPantryApp
 
         private void FilterButton_Click(object sender, EventArgs e)
         {
-            var filterInput = this.FilterTextBox.Text;
+            var filterInput = this.FilterTextBox.Text.ToLower();
             var filterCheck = this.FilterCheckBoxCheck();
             if (this.inventoryList.Count > 0)
             {
@@ -44,14 +44,15 @@ namespace FoodPantryApp
                 {
                     if (filterCheck == 0)
                     {
-                        if (item.Type.Contains(filterInput))
+                        
+                        if (item.Type.ToLower().Contains(filterInput))
                         {
                             InventoryDisplayList.Items.Add($"{item.Type} - {item.Name} -- {item.Quantity}");
                         }
                     }
                     else if (filterCheck == 1)
                     {
-                        if (item.Name.Contains(filterInput))
+                        if (item.Name.ToLower().Contains(filterInput))
                         {
                             InventoryDisplayList.Items.Add($"{item.Type} - {item.Name} -- {item.Quantity}");
                         }
@@ -61,7 +62,7 @@ namespace FoodPantryApp
                         var value = int.TryParse(filterInput, out int result);
                         if (value)
                         {
-                            if (item.Quantity <= result)
+                            if (item.Quantity == result)
                             {
                                 InventoryDisplayList.Items.Add($"{item.Type} - {item.Name} -- {item.Quantity}");
                             }
