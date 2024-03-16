@@ -6,6 +6,8 @@ namespace FoodPantryApp
 {
     public partial class MainForm : Form
     {
+        public string logPath = "";
+
         private InventoryList inventoryList;
 
         private List<string> FilterList = new List<string>();
@@ -17,7 +19,6 @@ namespace FoodPantryApp
             this.FillFilterList();
             this.RefreshInventoryList();
             this.UpdateListButton.Enabled = false;
-            Logger.WriteLog($"{System.Security.Principal.WindowsIdentity.GetCurrent().Name} started application. ");
         }
 
         private void FillFilterList()
@@ -97,7 +98,8 @@ namespace FoodPantryApp
                     try
                     {
                         string[] lines = File.ReadAllLines(openFileDialog.FileName);
-
+                        string directoryPath = Path.GetDirectoryName(openFileDialog.FileName);
+                        this.logPath = $"{directoryPath}/inventory_log_{DateTime.Today.Month}_{DateTime.Today.Day}_{DateTime.Today.Year}.log";
                         foreach (string line in lines)
                         {
                             string[] fields = line.Split(',');
@@ -123,7 +125,7 @@ namespace FoodPantryApp
                         RefreshInventoryList();
                         this.UpdateListButton.Enabled = true;
                         MessageBox.Show("File loaded successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        Logger.WriteLog($"{System.Security.Principal.WindowsIdentity.GetCurrent().Name} opened local file {openFileDialog.FileName}.");
+                        Logger.WriteLog($"{System.Security.Principal.WindowsIdentity.GetCurrent().Name} opened local file {openFileDialog.FileName}.", logPath);
                     }
                     catch (Exception ex)
                     {
@@ -155,7 +157,7 @@ namespace FoodPantryApp
                             }
                         }
                     }
-                    Logger.WriteLog($"{System.Security.Principal.WindowsIdentity.GetCurrent().Name} saved local file {saveFileDialog1.FileName}.");
+                    Logger.WriteLog($"{System.Security.Principal.WindowsIdentity.GetCurrent().Name} saved local file {saveFileDialog1.FileName}.", logPath);
                 }
             }
             catch (Exception ex)
@@ -167,7 +169,7 @@ namespace FoodPantryApp
         private void AddInventoryButton_Click(object sender, EventArgs e)
         {
             // Show the AddInventoryItemForm and pass the inventoryList instance
-            using (AddInventoryItemForm addItemForm = new AddInventoryItemForm(inventoryList))
+            using (AddInventoryItemForm addItemForm = new AddInventoryItemForm(inventoryList, this.logPath))
             {
                 if (addItemForm.ShowDialog() == DialogResult.OK)
                 {
@@ -212,7 +214,7 @@ namespace FoodPantryApp
                     if (selectedItemToUpdate != null)
                     {
                         // Create an instance of the update form
-                        using (UpdateInventoryItemForm updateForm = new UpdateInventoryItemForm(selectedItemToUpdate))
+                        using (UpdateInventoryItemForm updateForm = new UpdateInventoryItemForm(selectedItemToUpdate, this.logPath))
                         {
                             // Show the update form as a dialog
                             if (updateForm.ShowDialog() == DialogResult.OK)
@@ -259,7 +261,7 @@ namespace FoodPantryApp
                         // If the user confirms the removal
                         if (result == DialogResult.Yes)
                         {
-                            Logger.WriteLog($"{System.Security.Principal.WindowsIdentity.GetCurrent().Name} Removed item {itemToRemove.Type}, {itemToRemove.Name}, {itemToRemove.Quantity}");
+                            Logger.WriteLog($"{System.Security.Principal.WindowsIdentity.GetCurrent().Name} Removed item {itemToRemove.Type}, {itemToRemove.Name}, {itemToRemove.Quantity}", this.logPath);
                             // Remove the item from the inventory list
                             inventoryList.RemoveItem(itemToRemove);
                             RefreshInventoryList();

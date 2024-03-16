@@ -6,10 +6,13 @@ namespace FoodPantryApp
     {
         private InventoryList inventoryList;
 
-        public AddInventoryItemForm(InventoryList inventoryList)
+        private string logPath = string.Empty;
+
+        public AddInventoryItemForm(InventoryList inventoryList, string logPath)
         {
             InitializeComponent();
             this.inventoryList = inventoryList;
+            this.logPath = logPath;
         }
 
         private void SubmitButton_Click(object sender, EventArgs e)
@@ -42,7 +45,7 @@ namespace FoodPantryApp
 
                 // Close the form with DialogResult.OK
                 DialogResult = DialogResult.OK;
-                Logger.WriteLog($"{System.Security.Principal.WindowsIdentity.GetCurrent().Name} added item {newItem.Type}, {newItem.Name}, {newItem.Quantity} to list.");
+                Logger.WriteLog($"{System.Security.Principal.WindowsIdentity.GetCurrent().Name} added item {newItem.Type}, {newItem.Name}, {newItem.Quantity} to list.", this.logPath);
             }
             catch (Exception ex)
             {

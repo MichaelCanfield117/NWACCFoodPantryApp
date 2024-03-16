@@ -4,9 +4,10 @@
 
     public static class Logger
     {
-        public static void WriteLog(string message)
+
+        public static void WriteLog(string message, string logPath)
         {
-            string logPath = $"{Directory.GetCurrentDirectory()}.log.txt";
+            //string logPath = $"{Directory.GetCurrentDirectory()}/log.log";
             using (StreamWriter sw = new StreamWriter(logPath, true)) { sw.WriteLine($"{DateTime.Now} : {message}"); }
         }
     }
