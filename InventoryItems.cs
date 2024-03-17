@@ -14,5 +14,6 @@ namespace FoodPantryApp
             Name = name;
             Quantity = quantity;
         }
+
     }
 }

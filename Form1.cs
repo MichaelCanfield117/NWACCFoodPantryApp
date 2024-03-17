@@ -186,8 +186,10 @@ namespace FoodPantryApp
             // Retrieve all items from the inventoryList
             var allItems = inventoryList.GetAllItems();
 
+            var sortedItems = allItems.OrderBy(x => x.Type).ThenBy(x => x.Name);
+
             // Add each item to the list box
-            foreach (var item in allItems)
+            foreach (var item in sortedItems)
             {
                 InventoryDisplayList.Items.Add($"{item.Type} - {item.Name} -- {item.Quantity}");
             }
