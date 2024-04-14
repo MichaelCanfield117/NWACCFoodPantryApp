@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             InventoryDisplayList = new ListBox();
             FilterTextBox = new TextBox();
             FilterButton = new Button();
@@ -39,6 +40,14 @@
             UpdateListButton = new Button();
             OpenFileButton = new Button();
             FilterComboBox = new ComboBox();
+            printDocument1 = new System.Drawing.Printing.PrintDocument();
+            PreviewButton = new Button();
+            TypeLabel = new Label();
+            NameDescriptionLabel = new Label();
+            QuantityLabel = new Label();
+            printPreviewDialog1 = new PrintPreviewDialog();
+            PrintButton = new Button();
+            printDialog1 = new PrintDialog();
             ((System.ComponentModel.ISupportInitialize)TitlePictureBox).BeginInit();
             SuspendLayout();
             // 
@@ -47,7 +56,7 @@
             InventoryDisplayList.Font = new Font("Segoe UI", 12F);
             InventoryDisplayList.FormattingEnabled = true;
             InventoryDisplayList.ItemHeight = 28;
-            InventoryDisplayList.Location = new Point(12, 199);
+            InventoryDisplayList.Location = new Point(12, 227);
             InventoryDisplayList.Name = "InventoryDisplayList";
             InventoryDisplayList.Size = new Size(499, 620);
             InventoryDisplayList.TabIndex = 2;
@@ -84,9 +93,9 @@
             // AddInventoryItem
             // 
             AddInventoryItem.Font = new Font("Segoe UI", 16F);
-            AddInventoryItem.Location = new Point(517, 447);
+            AddInventoryItem.Location = new Point(517, 401);
             AddInventoryItem.Name = "AddInventoryItem";
-            AddInventoryItem.Size = new Size(324, 125);
+            AddInventoryItem.Size = new Size(324, 97);
             AddInventoryItem.TabIndex = 10;
             AddInventoryItem.Text = "Add Inventory Item";
             AddInventoryItem.UseVisualStyleBackColor = true;
@@ -95,9 +104,9 @@
             // UpdateInventoryButton
             // 
             UpdateInventoryButton.Font = new Font("Segoe UI", 16F);
-            UpdateInventoryButton.Location = new Point(517, 316);
+            UpdateInventoryButton.Location = new Point(517, 306);
             UpdateInventoryButton.Name = "UpdateInventoryButton";
-            UpdateInventoryButton.Size = new Size(324, 125);
+            UpdateInventoryButton.Size = new Size(324, 89);
             UpdateInventoryButton.TabIndex = 11;
             UpdateInventoryButton.Text = "Update Inventory Item";
             UpdateInventoryButton.UseVisualStyleBackColor = true;
@@ -106,7 +115,7 @@
             // RemoveInventoryButton
             // 
             RemoveInventoryButton.Font = new Font("Segoe UI", 16F);
-            RemoveInventoryButton.Location = new Point(517, 578);
+            RemoveInventoryButton.Location = new Point(517, 504);
             RemoveInventoryButton.Name = "RemoveInventoryButton";
             RemoveInventoryButton.Size = new Size(324, 125);
             RemoveInventoryButton.TabIndex = 12;
@@ -127,7 +136,7 @@
             // UpdateListButton
             // 
             UpdateListButton.Font = new Font("Segoe UI", 14F);
-            UpdateListButton.Location = new Point(517, 709);
+            UpdateListButton.Location = new Point(517, 635);
             UpdateListButton.Name = "UpdateListButton";
             UpdateListButton.Size = new Size(324, 102);
             UpdateListButton.TabIndex = 14;
@@ -141,7 +150,7 @@
             OpenFileButton.Location = new Point(517, 199);
             OpenFileButton.Margin = new Padding(2);
             OpenFileButton.Name = "OpenFileButton";
-            OpenFileButton.Size = new Size(324, 112);
+            OpenFileButton.Size = new Size(324, 102);
             OpenFileButton.TabIndex = 15;
             OpenFileButton.Text = "Open File";
             OpenFileButton.UseVisualStyleBackColor = true;
@@ -156,11 +165,89 @@
             FilterComboBox.Size = new Size(167, 28);
             FilterComboBox.TabIndex = 16;
             // 
+            // printDocument1
+            // 
+            printDocument1.PrintPage += printDocument1_PrintPage;
+            // 
+            // PreviewButton
+            // 
+            PreviewButton.Enabled = false;
+            PreviewButton.Font = new Font("Segoe UI", 14F);
+            PreviewButton.Location = new Point(517, 743);
+            PreviewButton.Name = "PreviewButton";
+            PreviewButton.Size = new Size(149, 104);
+            PreviewButton.TabIndex = 20;
+            PreviewButton.Text = "Print Preview";
+            PreviewButton.UseVisualStyleBackColor = true;
+            PreviewButton.Click += printPreviewButton_click;
+            // 
+            // TypeLabel
+            // 
+            TypeLabel.AutoSize = true;
+            TypeLabel.Font = new Font("Segoe UI", 12F);
+            TypeLabel.Location = new Point(12, 196);
+            TypeLabel.Name = "TypeLabel";
+            TypeLabel.Size = new Size(53, 28);
+            TypeLabel.TabIndex = 17;
+            TypeLabel.Text = "Type";
+            // 
+            // NameDescriptionLabel
+            // 
+            NameDescriptionLabel.AutoSize = true;
+            NameDescriptionLabel.Font = new Font("Segoe UI", 12F);
+            NameDescriptionLabel.Location = new Point(88, 196);
+            NameDescriptionLabel.Name = "NameDescriptionLabel";
+            NameDescriptionLabel.Size = new Size(207, 28);
+            NameDescriptionLabel.TabIndex = 18;
+            NameDescriptionLabel.Text = "Name and Description";
+            // 
+            // QuantityLabel
+            // 
+            QuantityLabel.AutoSize = true;
+            QuantityLabel.Font = new Font("Segoe UI", 12F);
+            QuantityLabel.Location = new Point(315, 196);
+            QuantityLabel.Name = "QuantityLabel";
+            QuantityLabel.Size = new Size(88, 28);
+            QuantityLabel.TabIndex = 19;
+            QuantityLabel.Text = "Quantity";
+            // 
+            // printPreviewDialog1
+            // 
+            printPreviewDialog1.AutoScrollMargin = new Size(0, 0);
+            printPreviewDialog1.AutoScrollMinSize = new Size(0, 0);
+            printPreviewDialog1.ClientSize = new Size(400, 300);
+            printPreviewDialog1.Document = printDocument1;
+            printPreviewDialog1.Enabled = true;
+            printPreviewDialog1.Icon = (Icon)resources.GetObject("printPreviewDialog1.Icon");
+            printPreviewDialog1.Name = "printPreviewDialog1";
+            printPreviewDialog1.Visible = false;
+            // 
+            // PrintButton
+            // 
+            PrintButton.Enabled = false;
+            PrintButton.Font = new Font("Segoe UI", 15F);
+            PrintButton.Location = new Point(672, 743);
+            PrintButton.Name = "PrintButton";
+            PrintButton.Size = new Size(169, 104);
+            PrintButton.TabIndex = 21;
+            PrintButton.Text = "Print";
+            PrintButton.UseVisualStyleBackColor = true;
+            PrintButton.Click += PrintButton_Click_1;
+            // 
+            // printDialog1
+            // 
+            printDialog1.UseEXDialog = true;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(865, 840);
+            ClientSize = new Size(865, 853);
+            Controls.Add(PrintButton);
+            Controls.Add(PreviewButton);
+            Controls.Add(QuantityLabel);
+            Controls.Add(NameDescriptionLabel);
+            Controls.Add(TypeLabel);
             Controls.Add(FilterComboBox);
             Controls.Add(OpenFileButton);
             Controls.Add(UpdateListButton);
@@ -173,6 +260,7 @@
             Controls.Add(FilterTextBox);
             Controls.Add(InventoryDisplayList);
             Name = "MainForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Food Pantry Inventory";
             ((System.ComponentModel.ISupportInitialize)TitlePictureBox).EndInit();
             ResumeLayout(false);
@@ -194,5 +282,13 @@
         private Button UpdateListButton;
         private Button OpenFileButton;
         private ComboBox FilterComboBox;
+        private System.Drawing.Printing.PrintDocument printDocument1;
+        private Button PreviewButton;
+        private Label TypeLabel;
+        private Label NameDescriptionLabel;
+        private Label QuantityLabel;
+        private PrintPreviewDialog printPreviewDialog1;
+        private Button PrintButton;
+        private PrintDialog printDialog1;
     }
 }

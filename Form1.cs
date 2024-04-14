@@ -1,12 +1,27 @@
 // Form1.cs
 
-using System.Windows.Forms;
+using System.Drawing.Printing;
+using System.IO;
+using System.Collections;
 
 namespace FoodPantryApp
 {
+    using System.Text;
+    using System.Windows.Forms;
+
     public partial class MainForm : Form
     {
         public string logPath = "";
+
+        private int listCount;
+
+        private int listPositiion = 1;
+
+        private int pageCounter = 0;
+
+        private float ypos = 1;
+
+        private PrintPreviewDialog previewDlg = null;
 
         private InventoryList inventoryList;
 
@@ -45,7 +60,7 @@ namespace FoodPantryApp
                 {
                     if (filterCheck == 0)
                     {
-                        
+
                         if (item.Type.ToLower().Contains(filterInput))
                         {
                             InventoryDisplayList.Items.Add($"{item.Type} - {item.Name} -- {item.Quantity}");
@@ -124,6 +139,8 @@ namespace FoodPantryApp
 
                         RefreshInventoryList();
                         this.UpdateListButton.Enabled = true;
+                        this.PreviewButton.Enabled = true;
+                        this.PrintButton.Enabled = true;
                         MessageBox.Show("File loaded successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         Logger.WriteLog($"{System.Security.Principal.WindowsIdentity.GetCurrent().Name} opened local file {openFileDialog.FileName}.", logPath);
                     }
@@ -279,6 +296,44 @@ namespace FoodPantryApp
             {
                 MessageBox.Show("Please select an item to remove.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void printDocument1_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            this.ypos = 100;
+            this.pageCounter = 0;
+            this.listCount = this.InventoryDisplayList.Items.Count;
+            e.Graphics.DrawString("Type - Name and Description -- Quantity", new Font("Times New Roman", 20, FontStyle.Bold), Brushes.Black, 100, this.ypos);
+            this.ypos += 35;
+            while (this.listPositiion < this.listCount && this.pageCounter < 35)
+            {
+                e.Graphics.DrawString(this.InventoryDisplayList.Items[this.listPositiion].ToString(), new Font("Times New Roman", 14, FontStyle.Regular), Brushes.Black, 100, this.ypos);
+                this.pageCounter++;
+                this.listPositiion++;
+                this.ypos += 25;
+
+            }
+            e.HasMorePages = this.listPositiion < this.listCount;
+        }
+
+        private void PrintButton_Click_1(object sender, EventArgs e)
+        {
+            this.listPositiion = 0;
+            this.previewDlg = new PrintPreviewDialog();
+            PrintDocument pd = new PrintDocument();
+            pd.PrintPage += new PrintPageEventHandler(this.printDocument1_PrintPage);
+            pd.Print();
+            Logger.WriteLog($"{System.Security.Principal.WindowsIdentity.GetCurrent().Name} printed file on {DateTime.Now}", logPath);
+        }
+
+        private void printPreviewButton_click(object sender, EventArgs e)
+        {
+            this.listPositiion = 0;
+            this.previewDlg = new PrintPreviewDialog();
+            PrintDocument pd = new PrintDocument();
+            pd.PrintPage += new PrintPageEventHandler(this.printDocument1_PrintPage);
+            this.previewDlg.Document = pd;
+            this.previewDlg.ShowDialog();
         }
     }
 }
