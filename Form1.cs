@@ -1,32 +1,56 @@
 // Form1.cs
 
 using System.Drawing.Printing;
-using System.IO;
-using System.Collections;
 
 namespace FoodPantryApp
 {
-    using System.Text;
     using System.Windows.Forms;
 
     public partial class MainForm : Form
     {
-        public string logPath = "";
+        /// <summary>
+        /// The log path variable for logging.
+        /// </summary>
+        public string logPath = String.Empty;
 
+        /// <summary>
+        /// The list count variable for use in print preview and printing.
+        /// </summary>
         private int listCount;
 
-        private int listPositiion = 1;
+        /// <summary>
+        /// The list position variable for use in print preview and printing.
+        /// </summary>
+        private int listPosition = 0;
 
+        /// <summary>
+        /// The page counter variable for use in print preview and printing.
+        /// </summary>
         private int pageCounter = 0;
 
+        /// <summary>
+        /// The ypos variable for use in print preview and printing.
+        /// </summary>
         private float ypos = 1;
 
+        /// <summary>
+        /// The preview dlg variable for use in print preview and printing.
+        /// </summary>
         private PrintPreviewDialog previewDlg = null;
 
+        /// <summary>
+        /// The inventory list that stores the data read from file or saved to.
+        /// </summary>
         private InventoryList inventoryList;
 
+        /// <summary>
+        /// The filter list that stores the filtered data from the inventory list.
+        /// </summary>
         private List<string> FilterList = new List<string>();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainForm"/> class.
+        /// </summary>
         public MainForm()
         {
             this.InitializeComponent();
@@ -36,6 +60,9 @@ namespace FoodPantryApp
             this.UpdateListButton.Enabled = false;
         }
 
+        /// <summary>
+        /// The function that adds the filter options for the filter list functions.
+        /// </summary>
         private void FillFilterList()
         {
             this.FilterList.Add("Type");
@@ -48,6 +75,15 @@ namespace FoodPantryApp
             this.FilterComboBox.SelectedIndex = 0;
         }
 
+        /// <summary>
+        /// The filter button_ click that filters the inventory list and displays the filtered list.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
         private void FilterButton_Click(object sender, EventArgs e)
         {
             var filterInput = this.FilterTextBox.Text.ToLower();
@@ -88,18 +124,42 @@ namespace FoodPantryApp
             }
         }
 
+        /// <summary>
+        /// The filter check box check function that returns the position of the filter select box.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
         private int FilterCheckBoxCheck()
         {
             var filterNum = this.FilterComboBox.SelectedIndex;
             return filterNum;
         }
 
+        /// <summary>
+        /// The functions that resets the displayed list and clears the filter list.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
         private void ResetListButton_Click(object sender, EventArgs e)
         {
             this.FilterTextBox.Text = string.Empty;
             this.RefreshInventoryList();
         }
 
+        /// <summary>
+        /// The function that handles opening a file and filling the inventory list with the data from the file.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
         private void OpenFileButton_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
@@ -152,7 +212,24 @@ namespace FoodPantryApp
             }
         }
 
+        /// <summary>
+        /// The function that runs the save file function when clicked.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
         private void SaveFileButton_Click(object sender, EventArgs e)
+        {
+            this.SaveFileFunction();
+        }
+
+        /// <summary>
+        /// The save file function.
+        /// </summary>
+        private void SaveFileFunction()
         {
             try
             {
@@ -174,6 +251,8 @@ namespace FoodPantryApp
                             }
                         }
                     }
+                    string directoryPath = Path.GetDirectoryName(saveFileDialog1.FileName);
+                    this.logPath = $"{directoryPath}/inventory_log_{DateTime.Today.Month}_{DateTime.Today.Day}_{DateTime.Today.Year}.log";
                     Logger.WriteLog($"{System.Security.Principal.WindowsIdentity.GetCurrent().Name} saved local file {saveFileDialog1.FileName}.", logPath);
                 }
             }
@@ -183,6 +262,15 @@ namespace FoodPantryApp
             }
         }
 
+        /// <summary>
+        /// The function that handles adding an inventory item to the list.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
         private void AddInventoryButton_Click(object sender, EventArgs e)
         {
             // Show the AddInventoryItemForm and pass the inventoryList instance
@@ -195,6 +283,9 @@ namespace FoodPantryApp
             }
         }
 
+        /// <summary>
+        /// The function that handles refreshing the display list with the data from the inventory list.
+        /// </summary>
         private void RefreshInventoryList()
         {
             // Clear existing items in the list box
@@ -212,6 +303,15 @@ namespace FoodPantryApp
             }
         }
 
+        /// <summary>
+        /// The function that updates an item.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
         private void UpdateInventoryButton_Click(object sender, EventArgs e)
         {
             // Check if an item is selected in the list box
@@ -254,6 +354,15 @@ namespace FoodPantryApp
             }
         }
 
+        /// <summary>
+        /// The function that removes an inventory item from the inventory list.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
         private void RemoveInventoryButton_Click(object sender, EventArgs e)
         {
             // Check if an item is selected in the list box
@@ -298,6 +407,15 @@ namespace FoodPantryApp
             }
         }
 
+        /// <summary>
+        /// The function that handles either printing or previewing a page of the data.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
         private void printDocument1_PrintPage(object sender, PrintPageEventArgs e)
         {
             this.ypos = 100;
@@ -305,20 +423,29 @@ namespace FoodPantryApp
             this.listCount = this.InventoryDisplayList.Items.Count;
             e.Graphics.DrawString("Type - Name and Description -- Quantity", new Font("Times New Roman", 20, FontStyle.Bold), Brushes.Black, 100, this.ypos);
             this.ypos += 35;
-            while (this.listPositiion < this.listCount && this.pageCounter < 35)
+            while (this.listPosition < this.listCount && this.pageCounter < 35)
             {
-                e.Graphics.DrawString(this.InventoryDisplayList.Items[this.listPositiion].ToString(), new Font("Times New Roman", 14, FontStyle.Regular), Brushes.Black, 100, this.ypos);
+                e.Graphics.DrawString(this.InventoryDisplayList.Items[this.listPosition].ToString(), new Font("Times New Roman", 14, FontStyle.Regular), Brushes.Black, 100, this.ypos);
                 this.pageCounter++;
-                this.listPositiion++;
+                this.listPosition++;
                 this.ypos += 25;
 
             }
-            e.HasMorePages = this.listPositiion < this.listCount;
+            e.HasMorePages = this.listPosition < this.listCount;
         }
 
+        /// <summary>
+        /// The button that prints the data.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
         private void PrintButton_Click_1(object sender, EventArgs e)
         {
-            this.listPositiion = 0;
+            this.listPosition = 0;
             this.previewDlg = new PrintPreviewDialog();
             PrintDocument pd = new PrintDocument();
             pd.PrintPage += new PrintPageEventHandler(this.printDocument1_PrintPage);
@@ -326,14 +453,41 @@ namespace FoodPantryApp
             Logger.WriteLog($"{System.Security.Principal.WindowsIdentity.GetCurrent().Name} printed file on {DateTime.Now}", logPath);
         }
 
+        /// <summary>
+        /// The button that previews the data to be printed.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
         private void printPreviewButton_click(object sender, EventArgs e)
         {
-            this.listPositiion = 0;
+            this.listPosition = 0;
             this.previewDlg = new PrintPreviewDialog();
             PrintDocument pd = new PrintDocument();
             pd.PrintPage += new PrintPageEventHandler(this.printDocument1_PrintPage);
             this.previewDlg.Document = pd;
             this.previewDlg.ShowDialog();
+        }
+
+        /// <summary>
+        /// Clears the inventory list and saves a new file.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void NewFileButton_Click(object sender, EventArgs e)
+        {
+            this.inventoryList.Clear();
+            this.UpdateListButton.Enabled = true;
+            this.PrintButton.Enabled = true;
+            this.PreviewButton.Enabled = true;
+            this.SaveFileFunction();
         }
     }
 }

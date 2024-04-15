@@ -2,12 +2,30 @@
 
 namespace FoodPantryApp
 {
+    /// <summary>
+    /// The add inventory item form.
+    /// </summary>
     public partial class AddInventoryItemForm : Form
     {
+        /// <summary>
+        /// The inventory list.
+        /// </summary>
         private InventoryList inventoryList;
 
+        /// <summary>
+        /// The log path for logging.
+        /// </summary>
         private string logPath = string.Empty;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AddInventoryItemForm"/> class.
+        /// </summary>
+        /// <param name="inventoryList">
+        /// The inventory list.
+        /// </param>
+        /// <param name="logPath">
+        /// The log path.
+        /// </param>
         public AddInventoryItemForm(InventoryList inventoryList, string logPath)
         {
             InitializeComponent();
@@ -15,6 +33,15 @@ namespace FoodPantryApp
             this.logPath = logPath;
         }
 
+        /// <summary>
+        /// The function that adds a new item to the inventory list and closes the AddInventoryItemForm.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
         private void SubmitButton_Click(object sender, EventArgs e)
         {
             // Validate input
@@ -53,7 +80,16 @@ namespace FoodPantryApp
             }
         }
 
-            private void CancelButton_Click(object sender, EventArgs e)
+        /// <summary>
+        /// The cancel button function that closes the AddInventoryForm without submitting any data.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void CancelButton_Click(object sender, EventArgs e)
         {
             // Close the form without making any changes
             DialogResult = DialogResult.Cancel;

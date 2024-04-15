@@ -248,6 +248,7 @@
             NewFileButton.TabIndex = 22;
             NewFileButton.Text = "New File";
             NewFileButton.UseVisualStyleBackColor = true;
+            NewFileButton.Click += NewFileButton_Click;
             // 
             // MainForm
             // 
