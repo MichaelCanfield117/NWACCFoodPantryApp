@@ -48,6 +48,7 @@
             printPreviewDialog1 = new PrintPreviewDialog();
             PrintButton = new Button();
             printDialog1 = new PrintDialog();
+            NewFileButton = new Button();
             ((System.ComponentModel.ISupportInitialize)TitlePictureBox).BeginInit();
             SuspendLayout();
             // 
@@ -150,7 +151,7 @@
             OpenFileButton.Location = new Point(517, 199);
             OpenFileButton.Margin = new Padding(2);
             OpenFileButton.Name = "OpenFileButton";
-            OpenFileButton.Size = new Size(324, 102);
+            OpenFileButton.Size = new Size(162, 102);
             OpenFileButton.TabIndex = 15;
             OpenFileButton.Text = "Open File";
             OpenFileButton.UseVisualStyleBackColor = true;
@@ -238,11 +239,22 @@
             // 
             printDialog1.UseEXDialog = true;
             // 
+            // NewFileButton
+            // 
+            NewFileButton.Font = new Font("Segoe UI", 14F);
+            NewFileButton.Location = new Point(684, 200);
+            NewFileButton.Name = "NewFileButton";
+            NewFileButton.Size = new Size(157, 100);
+            NewFileButton.TabIndex = 22;
+            NewFileButton.Text = "New File";
+            NewFileButton.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(865, 853);
+            Controls.Add(NewFileButton);
             Controls.Add(PrintButton);
             Controls.Add(PreviewButton);
             Controls.Add(QuantityLabel);
@@ -290,5 +302,6 @@
         private PrintPreviewDialog printPreviewDialog1;
         private Button PrintButton;
         private PrintDialog printDialog1;
+        private Button NewFileButton;
     }
 }
