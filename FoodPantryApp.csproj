@@ -23,8 +23,4 @@
     </EmbeddedResource>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Current Beta Release\" />
-  </ItemGroup>
-
 </Project>
