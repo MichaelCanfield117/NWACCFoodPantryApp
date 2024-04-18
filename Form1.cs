@@ -484,6 +484,7 @@ namespace FoodPantryApp
         private void NewFileButton_Click(object sender, EventArgs e)
         {
             this.inventoryList.Clear();
+            this.RefreshInventoryList();
             this.UpdateListButton.Enabled = true;
             this.PrintButton.Enabled = true;
             this.PreviewButton.Enabled = true;
